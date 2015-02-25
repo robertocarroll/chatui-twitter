@@ -1,1 +1,1 @@
-web: bin/hubot -a twitter -n chatbot-twitter
+web: bin/hubot -a twitter -n CityCentreMEN
