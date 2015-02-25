@@ -18,6 +18,7 @@
 FeedParser = require('feedparser')
 request = require('request')
 moment = require('moment')
+shorturl = require('shorturl')
 
 getTheArticle = (callback) ->
   feedparser = new FeedParser()
@@ -52,5 +53,5 @@ module.exports = (robot) ->
   robot.hear /latest news|latest ?/i, (msg) ->
     gotItThanks = false
     getTheArticle (article, theLink, theDate) ->
-      msg.send "Here's the latest news about me: '#{article}'. It's #{theDate} old. You can read all about it here: #{theLink}" unless gotItThanks
+      msg.send "#{theLink}" unless gotItThanks
       gotItThanks = true
