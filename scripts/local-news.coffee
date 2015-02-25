@@ -18,7 +18,6 @@
 FeedParser = require('feedparser')
 request = require('request')
 moment = require('moment')
-shorturl = require('shorturl')
 
 getTheArticle = (callback) ->
   feedparser = new FeedParser()
