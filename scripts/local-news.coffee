@@ -10,7 +10,7 @@
 #   None
 #
 # Commands:
-#   latest local news - Gets the latest story from MEN about the Manchester Central library.
+#   latest - Gets the latest story from MEN about Manchester City Centre
 #
 # Author:
 #   robertocarroll
@@ -49,9 +49,8 @@ getTheArticle = (callback) ->
   )
 
 module.exports = (robot) ->
-  robot.hear /latest local story|latest story about you ?/i, (msg) ->
+  robot.hear /latest news|latest ?/i, (msg) ->
     gotItThanks = false
-
     getTheArticle (article, theLink, theDate) ->
-      msg.send "Here's the latest news about me: '#{article}'. Find out more here: #{theLink}" unless gotItThanks
+      msg.send "Here's the latest news about me: '#{article}'. It's #{theDate} old. You can read all about it here: #{theLink}" unless gotItThanks
       gotItThanks = true
