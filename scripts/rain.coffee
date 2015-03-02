@@ -15,12 +15,10 @@
 
 moment = require 'moment'
 
-# default greeting
-
-
 # Time
 currentHour = null
 greeting = null
+
 getGreeting = (greeting) ->
 	currentHour = moment().hour()
 	if currentHour < 12
@@ -31,9 +29,6 @@ getGreeting = (greeting) ->
 		greeting = 'Good evening'
 	else
 		greeting = 'Hello'
-
-# Weather  
-
 
 # get the weather
 currentWeather = ' '
@@ -58,7 +53,7 @@ getWeather = (msg, cb) ->
     						totalIntensity += (dataPoint['precipIntensity'] || 0)
 
     						if totalIntensity == 0
-				    			currentWeather = "Excellent! Looks like a clear, dry hour."
+				    			currentWeather = "Excellent! Looks like a clear, dry hour from here."
 				    		else 
 				    			dataPointsWithPrecipitation.push(dataPoint)
 				    			hightIntensity = mostIntenseDataPoint['precipIntensity'] || 0
@@ -67,7 +62,10 @@ getWeather = (msg, cb) ->
 				    			hightProbability = mostProbableDataPoint['precipProbability'] || 0
 				    			mostProbableDataPoint = dataPoint if probability > hightProbability
 
-				    			isAnomaly = true if dataPointsWithPrecipitation.length < 5
+				    			amountOfRain = dataPointsWithPrecipitation.length
+				    			
+				    			isAnomaly = false
+				    			isAnomaly = true if amountOfRain < 5
 				    			isAnomaly = true if mostIntenseDataPoint['precipProbability'] < 0.20
 				    			isAnomaly = true if totalIntensity < (3 * mostIntenseDataPoint['precipIntensity'])
 
@@ -81,7 +79,6 @@ getWeather = (msg, cb) ->
 				    					_intensity = 'light'
 				    				else
 				    					_intensity = 'very light'
-
 
 				    				probability = mostProbableDataPoint['precipProbability']
 				    				if probability >= 0.99
@@ -102,11 +99,9 @@ getWeather = (msg, cb) ->
 				    				delta = (date - now)
 				    				mostIntenseFromNow = "#{Math.round(delta / 60 / 1000)}"
 
-				    				currentWeather = "It's #{_probability} to rain in the next hour. It will probably be #{_intensity} rain in about #{mostIntenseFromNow} minutes."
+				    				currentWeather = "I think it's #{_probability} to rain in the next hour. It will probably be #{_intensity} rain in about #{mostIntenseFromNow} minutes."
 				    			else 
-				    				currentWeather = "Don't worry. It's probably not going to rain in the next hour."
-				    				
-
+				    				currentWeather = "Don't worry. I don't think it's going to rain in the next hour."
     		catch e
     			currentWeather = "Sorry, I can't get a forecast at the moment."
     		cb currentWeather
