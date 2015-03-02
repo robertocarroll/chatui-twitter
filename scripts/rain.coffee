@@ -89,11 +89,9 @@ getWeather = (msg, cb) ->
 				    					_probability = 'likely'
 				    				else if probability >= 0.33
 				    					_probability = 'likely as not'	
-				    				else if probability >= 0.10
-				    					_probability = 'unlikely'	
 				    				else
-				    					_probability = 'probably not going'				
-
+				    					_probability = 'probably not going'
+				    					
 				    				timestamp = mostIntenseDataPoint['time']
 				    				date = new Date(timestamp * 1000)
 				    				delta = (date - now)

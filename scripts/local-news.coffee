@@ -52,5 +52,6 @@ module.exports = (robot) ->
   robot.hear /latest news|latest ?/i, (msg) ->
     gotItThanks = false
     getTheArticle (article, theLink, theDate) ->
-      msg.send "Here's the latest: #{theLink}. It’s #{theDate} old." unless gotItThanks
-      gotItThanks = true
+    	theArticle = article.substring(0,48)+"...";
+    	msg.send "I bring to you: #{theArticle}. #{theLink} It’s #{theDate} old." unless gotItThanks
+    	gotItThanks = true
