@@ -16,15 +16,24 @@
 moment = require 'moment'
 
 # default greeting
-greeting = 'Hello'
- # Time
-currentHour = moment().hour()
-if currentHour < 12
-  greeting = 'Good morning'
-if currentHour >= 12 && currentHour <= 17
-  greeting = 'Good afternoon'
-if currentHour > 17 && currentHour <= 24
-  greeting = 'Good evening'
+
+
+# Time
+currentHour = null
+greeting = null
+getGreeting = (greeting) ->
+	currentHour = moment().hour()
+	if currentHour < 12
+		greeting = 'Good morning'
+	else if currentHour >= 12 && currentHour <= 17
+		greeting = 'Good afternoon'
+	else if currentHour > 17 && currentHour <= 24
+		greeting = 'Good evening'
+	else
+		greeting = 'Hello'
+
+# Weather  
+
 
 # get the weather
 currentWeather = ' '
@@ -105,9 +114,9 @@ getWeather = (msg, cb) ->
 
 module.exports = (robot) ->
   robot.hear /rain/i, (msg) ->
-    # Weather  
-    getWeather msg, (currentWeather) ->  
-    	msg.send greeting + '. ' + currentWeather
+  	getWeather msg, (currentWeather) ->
+  		theGreeting = getGreeting(greeting)
+  		msg.send theGreeting + '. ' + currentWeather
     
 
 
