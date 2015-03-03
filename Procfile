@@ -1,1 +1,1 @@
-web: bin/hubot -a twitter -n CityCentreMEN
+web: bin/hubot -a twitter -n ArndalePostbox
