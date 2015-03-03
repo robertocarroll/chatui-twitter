@@ -33,7 +33,8 @@ module.exports = (robot) ->
 		robot.logger.info "Loading knowledge"
 		robot.brain.data.questions ?= {}
 
-		if _.isUndefined(robot.brain.data.questions) then robot.brain.data.questions = initial_question_bank
+		# if _.isUndefined(robot.brain.data.questions) then 
+		robot.brain.data.questions = initial_question_bank
 		question_bank = robot.brain.data.questions
 		current_question = null
 		question_ids = Object.keys(question_bank)
