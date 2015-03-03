@@ -13,6 +13,10 @@
 # Author:
 #   robertocarroll
 
+ss = require 'simple-statistics'
+
+population = 20206 
+
 crime_name = [{"url":"all-crime","name":"All crime"},{"url":"anti-social-behaviour","name":"Anti-social behaviour"},{"url":"bicycle-theft","name":"Bicycle theft"},{"url":"burglary","name":"Burglary"},{"url":"criminal-damage-arson","name":"Criminal damage and arson"},{"url":"drugs","name":"Drugs"},{"url":"other-theft","name":"Other theft"},{"url":"possession-of-weapons","name":"Possession of weapons"},{"url":"public-order","name":"Public order"},{"url":"robbery","name":"Robbery"},{"url":"shoplifting","name":"Shoplifting"},{"url":"theft-from-the-person","name":"Theft from the person"},{"url":"vehicle-crime","name":"Vehicle crime"},{"url":"violent-crime","name":"Violence and sexual offences"},{"url":"other-crime","name":"Other crime"}]
 
 crimes = [{"Date":"2014-12","ASB":434,"Burglary":46,"Robbery":35,"Vehicle":57,"Violent":232,"Drugs":30,"CD&A":48,"Shoplifting":198,"Bike Theft":28,"Theft From the Person":251,"Other Theft":279,"Weapons":2,"Public Order":57,"Other":9,"Total":1706},
@@ -105,30 +109,24 @@ getCrime = (msg, cb) ->
 				currentCrime = "Sorry, I can't get a crime at the moment."
 			cb currentCrime		
 
-getCrimeMonth = (msg, cb) ->
-	try
-		totalCrimes = 0
-		detailCrimes = 0
-		averageDetail = null
-		crimeType = 'Violent'
-		crimeDate = '2014-01'
-		for crime in crimes
-		    totalCrimes += (crime['Total'] || 0)
-		    detailCrimes += (crime[crimeType] || 0)
-		find = (i for i in crimes when i.Date is crimeDate)[0] 
-		averageDetail = detailCrimes/(crimes.length)
-		violentCrime = find.Violent 
-		monthCrime = "The total #{violentCrime} and the average #{averageDetail} #{crimeDate}"
-	catch e
-		monthCrime = "Sorry, I can't get crime details at the moment."
-	cb monthCrime				
-
 module.exports = (robot) ->
   robot.hear /(\W|^)random\s{0,3}crime(\W|$)/i, (msg) ->
   	getCrime msg, (currentCrime) ->
   		msg.send currentCrime
 
-  robot.hear /(\S*)crimes(\W|$)/i, (msg) ->
-  	getCrimeMonth msg, (monthCrime) ->
-  		msg.send monthCrime	
-
+  robot.hear /safe/i, (msg) ->
+  	rateCrimes = 0
+  	crimeCompare = null
+  	regionNumber = crime_ranking.length
+  	for crime in crime_ranking
+  		rateCrimes += (Math.round(crime['Rate']) || 0)
+  	averageCrimeRate = 	rateCrimes/regionNumber
+  	find = (i for i in crime_ranking when i.Neighbourhood is 'Manchester City')[0] 
+  	crimeRate = find.Rate
+  	if crimeRate > averageCrimeRate
+  		crimeCompare = 'higher than'
+  	else if crimeRate < averageCrimeRate
+  		crimeCompare = 'lower than'
+  	else crimeCompare = 'the same as'
+  	safeVerdict = "Be careful. The crime rate of #{crimeRate} is #{crimeCompare} the local average of #{averageCrimeRate}."
+  	msg.send safeVerdict
