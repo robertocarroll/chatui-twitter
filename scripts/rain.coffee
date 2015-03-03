@@ -53,7 +53,7 @@ getWeather = (msg, cb) ->
     						totalIntensity += (dataPoint['precipIntensity'] || 0)
 
     						if totalIntensity == 0
-				    			currentWeather = "Excellent! Looks like a clear, dry hour from here."
+				    			currentWeather = "Excellent! Looks like a dry hour from here."
 				    		else 
 				    			dataPointsWithPrecipitation.push(dataPoint)
 				    			hightIntensity = mostIntenseDataPoint['precipIntensity'] || 0
@@ -91,7 +91,7 @@ getWeather = (msg, cb) ->
 				    					_probability = 'likely as not'	
 				    				else
 				    					_probability = 'probably not going'
-				    					
+
 				    				timestamp = mostIntenseDataPoint['time']
 				    				date = new Date(timestamp * 1000)
 				    				delta = (date - now)
@@ -103,7 +103,6 @@ getWeather = (msg, cb) ->
     		catch e
     			currentWeather = "Sorry, I can't get a forecast at the moment."
     		cb currentWeather
-
 
 module.exports = (robot) ->
   robot.hear /rain/i, (msg) ->
