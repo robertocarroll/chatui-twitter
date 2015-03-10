@@ -102,7 +102,7 @@ getCrime = (msg, cb) ->
 				street = current_crime.crime.location.street.name
 				find = (i for i in crime_name when i.url is crime)[0]
 				full_crime = find.name.toLowerCase()
-				currentCrime = "#{street} I believe there was a #{full_crime} incident in Dec 2014. #{status}."
+				currentCrime = "#{street} I believe there was a #{full_crime} incident. #{status}."
 			catch e
 				currentCrime = "Sorry, I can't get a crime at the moment."
 			cb currentCrime		
