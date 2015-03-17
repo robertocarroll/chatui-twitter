@@ -101,7 +101,7 @@ getWeather = (msg, cb) ->
 				    			else 
 				    				currentWeather = "Don't worry. I don't think it's going to rain in the next hour."
     		catch e
-    			currentWeather = "Sorry, I can't get a forecast at the moment."
+    			currentWeather = "Sorry, I can't get a forecast right now."
     		cb currentWeather
 
 module.exports = (robot) ->
