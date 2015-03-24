@@ -25,7 +25,7 @@ getChart = (msg, apiKey) ->
 			popular = response.pages || []
 			popular_article = popular[0].title.substring(0,48)+"[...]"
 			popular_article_link = popular[0].path
-			msg.send "The hottest story right now is: #{popular_article}. http://#{popular_article_link}"
+			msg.send "I bring you the hottest story right now: #{popular_article}. http://#{popular_article_link}"
 
 module.exports = (robot) ->
 	robot.hear /popular/i, (msg) ->
