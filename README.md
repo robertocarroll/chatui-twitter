@@ -1,6 +1,15 @@
 # How to make Manchester Evening News part of the fabric of the city.
 Exploring what lies between the physical newspaper and the digital web/app. What are the physical manifestations of news in a city? The project targets the *mobile* audience and the *local* audience.  
 
+### Commands 
+* 'rain' - tells you if it's going to rain in the next hour
+* 'latest' - gets the latest local story from MEN
+* 'popular' - gets the hottest social story from greater Manchester from MEN
+* 'burger' - recommends a burger place nearby
+* 'vote' - shows a candidate standing in the general election
+* 'safe' - gets the crime rate cf nearby crime rates
+* 'random crime' - shows a local crime and its outcome from crime stats for December 2014
+* 'talk' - a question and answer. Needs 'answer' in user answer to continue the conversation
 
 ### Running chatbot-twitter Locally
 
