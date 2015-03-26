@@ -20,7 +20,7 @@ burger_places = [
         "rating": "4",
         "minutes": "4",
         "distance": "0.2",
-        "address": "High Street, Northern Quarter",
+        "address": "High Street",
         "postcode": "M4 1HP",
         "latitude": "53.484476",
         "longitude": "-2.236841"
